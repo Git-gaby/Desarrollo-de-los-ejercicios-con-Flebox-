@@ -1,0 +1,142 @@
+/* Custom Properties (Variables CSS) - ¡Nueva paleta de colores! */
+:root {
+    --color-primary-bg: linear-gradient(135deg, #6DD5ED, #2193B0); /* Degradado vibrante */
+    --color-card-bg: #FFFFFF;
+    --color-text-dark: #2C3E50; /* Más oscuro, casi negro */
+    --color-text-light: #7F8C8D; /* Gris azulado */
+    --color-border-subtle: #ECF0F1; /* Gris muy claro para bordes */
+    --color-accent: #3498DB; /* Azul de acento */
+    --spacing-unit: 1rem; /* Base de espaciado */
+    --image-size: 70px; /* Tamaño de imagen ligeramente más grande */
+    --transition-speed-fast: 0.2s;
+    --transition-speed-normal: 0.3s;
+}
+
+body {
+    color: var(--color-text-dark);
+    background: var(--color-primary-bg); /* Fondo con degradado */
+    font-family: 'Poppins', sans-serif; /* Nueva fuente más moderna */
+    margin: 0; 
+    padding: calc(var(--spacing-unit) * 2); /* Más padding para un respiro */
+    display: flex; /* Para centrar el list-wrapper verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    min-height: 100vh; /* Ocupar toda la altura de la ventana */
+}
+
+.list-wrapper {
+    width: 100%;
+    max-width: 450px; /* Un poco más ancho para dar espacio */
+    margin: 0 auto; /* Margin 0 para que el flexbox de body funcione */
+    padding: var(--spacing-unit); /* Padding interno para el wrapper */
+}
+
+/* --- List component --- */
+.list {
+    background-color: var(--color-card-bg);
+    list-style: none;
+    margin: 0;
+    padding: 0; /* Padding controlado por los ítems */
+    border-radius: 15px; /* Bordes más redondeados y suaves */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.05); /* Sombra más profunda y multicapa */
+    overflow: hidden; 
+    transform: translateY(0); /* Base para la animación */
+    transition: transform var(--transition-speed-normal) ease-out;
+}
+
+/* Efecto para levantar la lista al pasar el ratón por encima (opcional, para el wrapper) */
+/* .list-wrapper:hover .list {
+    transform: translateY(-5px);
+} */
+
+
+    .list-item {
+        display: flex;
+        align-items: center; 
+        padding: calc(var(--spacing-unit) * 0.8) var(--spacing-unit); 
+        cursor: pointer; 
+        transition: background-color var(--transition-speed-fast) ease, 
+                    transform var(--transition-speed-fast) ease; /* Transición para el efecto hover */
+        position: relative; /* Para el pseudo-elemento del borde */
+    }
+    
+    /* Efecto Hover creativo: ligera elevación y cambio de fondo */
+    .list-item:hover {
+        background-color: #F8F8F8; 
+        transform: translateY(-2px); /* Un leve movimiento hacia arriba */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Sombra al pasar el ratón */
+    }
+
+    .list-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: var(--image-size); /* Empezar después de la imagen */
+        right: var(--spacing-unit);
+        height: 1px;
+        background-color: var(--color-border-subtle);
+        transform: scaleX(0.95); /* Borde un poco más corto para un toque elegante */
+    }
+        /* List item image wrapper */
+        .list-item__image {
+            flex-shrink: 0;
+            width: var(--image-size);
+            height: var(--image-size);
+            margin-right: calc(var(--spacing-unit) * 1.2); /* Más espacio */
+            position: relative;
+        }
+        
+            .list-item__image img {
+                border-radius: 50%;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                border: 3px solid var(--color-accent); /* Borde de color de acento */
+                box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2); /* Sombra exterior sutil */
+                transition: border-color var(--transition-speed-fast) ease, 
+                            box-shadow var(--transition-speed-fast) ease;
+            }
+            /* Efecto en la imagen al hacer hover sobre el item */
+            .list-item:hover .list-item__image img {
+                border-color: #2980B9; /* Azul más oscuro al pasar el ratón */
+                box-shadow: 0 0 0 4px rgba(41, 128, 185, 0.3);
+            }
+
+
+        /* List item content */
+        .list-item__content {
+            flex-grow: 1;
+            padding: 0; 
+        }
+
+            .list-item__name {
+                margin: 0;
+                font-size: 1.15rem; /* Más grande y prominente */
+                font-weight: 600; /* Más peso para el nombre */
+                line-height: 1.3;
+                color: var(--color-text-dark);
+            }
+
+            .list-item__address {
+                margin-top: calc(var(--spacing-unit) * 0.2); /* Espacio sutil */
+                color: var(--color-text-light);
+                font-size: 0.9rem; 
+                margin-bottom: 0;
+            }
+
+        /* Ícono de acción al final */
+        .list-item__action {
+            flex-shrink: 0;
+            color: var(--color-text-light);
+            font-size: 1rem; /* Más grande */
+            margin-left: calc(var(--spacing-unit) * 1.5);
+            transition: transform var(--transition-speed-fast) ease, 
+                        color var(--transition-speed-fast) ease;
+        }
+
+        /* Efecto creativo en el ícono al hacer hover */
+        .list-item:hover .list-item__action {
+            color: var(--color-accent); /* Cambiar a color de acento */
+            transform: translateX(3px); /* Un pequeño movimiento hacia la derecha */
+        }
